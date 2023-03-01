@@ -30,7 +30,7 @@ def get_current_temperature():
 
     json_response = response.json()
 
-    return jsonify({"city": city, "temperature": json_response["current_weather"]["temperature"]})
+    return jsonify({"city": city, "unit": "celsius", "temperature": json_response["current_weather"]["temperature"]})
 
 
 @app.route("/v1/forecast/")
@@ -61,7 +61,7 @@ def get_forecast():
 
     json_response = response.json()
 
-    return jsonify({"city": city, "temperature": json_response["hourly"]["temperature_2m"][dt.hour], "time": dt})
+    return jsonify({"city": city, "unit": "celsius", "temperature": json_response["hourly"]["temperature_2m"][dt.hour], "time": dt})
 
 
 if __name__ == "__main__":

@@ -14,7 +14,7 @@ geolocation = Nominatim(user_agent="SlyMercymain-tyap-lyap-app")
 @app.route("/v1/current/")
 def get_current_temperature():
     city = request.args.get("city")
-    if city is None:
+    if city is None or city == "":
         return jsonify({"Incorrect parameter": "City parameter is empty"})
 
     coordinates = geolocation.geocode(city)
@@ -35,7 +35,7 @@ def get_current_temperature():
 
 @app.route("/v1/forecast/")
 def get_forecast():
-    if request.args.get("dt") is None:
+    if request.args.get("dt") is None or request.args.get("dt") == "":
         return jsonify({"Incorrect parameter": "Datetime parameter is empty"})
 
     try:
@@ -44,7 +44,7 @@ def get_forecast():
         return jsonify({"Incorrect parameter": "Datetime parameter format is incorrerct. Try something like 2023-02-27T11:00"})
 
     city = request.args.get("city")
-    if city is None:
+    if city is None or city == "":
         return jsonify({"Incorrect parameter": "City parameter is empty"})
 
     coordinates = geolocation.geocode(city)

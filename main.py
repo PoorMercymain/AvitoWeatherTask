@@ -24,7 +24,7 @@ def get_current_temperature():
     reqStr = getenv("API") + "?latitude=" + str(coordinates.latitude) + "&longitude=" + str(
         coordinates.longitude) + "&current_weather=true"
 
-    response = requests.get(reqStr, request=20)
+    response = requests.get(reqStr, timeout=20)
     if response.status_code != 200:
         return jsonify({"Incorrect request": "Something went wrong while getting response from weather API"})
 
